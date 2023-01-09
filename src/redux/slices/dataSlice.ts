@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export interface ProductsData {
   data: {
@@ -33,15 +33,13 @@ const initialState: DataState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const data = fetch("https://reqres.in/api/products").then(
-      (res: Response) => {
-        if (!res.ok) {
-          throw new Error(`Error code: ${res.status}`);
-        } else {
-          return res.json();
-        }
+    const data = fetch("https://reqres.in/api/products").then((res) => {
+      if (!res.ok) {
+        throw new Error(`Error code: ${res.status}`);
+      } else {
+        return res.json();
       }
-    );
+    });
     return data;
   }
 );
